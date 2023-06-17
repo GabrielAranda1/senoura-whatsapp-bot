@@ -1,12 +1,13 @@
-import { HandlePhoneMessageUseCase } from "src/usecases";
 import { Router } from "express";
+import { HandlePhoneMessageUseCase } from "../usecases";
 
 const router = Router();
 
-router.route("/message").post((req, res) => {
-  console.log(req.body)
-  //HandlePhoneMessageUseCase.execute({});
-  res.status(200).send();
+router.route("/message").post(async (req, res) => {
+  const response = await HandlePhoneMessageUseCase.execute(req.body);
+
+  res.set('Content-Type', 'text/xml');
+  res.send(response).status(200);
 });
 
 export { router };
