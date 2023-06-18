@@ -35,12 +35,10 @@ class HandlePhoneMessage {
       .resize(512, 512)
       .toBuffer();
 
-    const path = this.writeImageToDisk(convertedImageBuffer);
+    const fileName = this.writeImageToDisk(convertedImageBuffer);
 
     const responseMessage = new MessagingResponse().message('sticker salvo com sucesso')
-    //responseMessage.media(`${process.env.TWILIO_BASE_URL}/media/${path}`)
-
-    console.log('Imagem enviada com sucesso:');
+    responseMessage.media(`${process.env.BASE_URL}/media/${fileName}`)
 
     return responseMessage.toString()
   }
@@ -56,7 +54,7 @@ class HandlePhoneMessage {
 
     fs.writeFileSync(filePath, imageBuffer);
 
-    return filePath
+    return fileName
   }
 }
 
