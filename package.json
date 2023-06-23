@@ -4,7 +4,9 @@
   "description": "",
   "main": "main.ts",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only ./src/main/main.ts"
+    "dev": "ts-node-dev --respawn --transpile-only ./src/main/main.ts",
+    "start": "node ./dist/src/main/main.js",
+    "build": "rimraf dist && tsc -p . --outDir dist"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +26,7 @@
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "rimraf": "^5.0.1",
     "sharp": "^0.32.1",
     "twilio": "^4.11.0"
   }
