@@ -3,8 +3,22 @@ import path from 'path'
 
 class GetStickerByPath {
   async execute(filePath: string) {
-    const sticker = fs.readFileSync(path.join(__dirname, '..', '..', 'media', filePath))
+    const completePath = path.join(__dirname, '..', '..', 'media', filePath)
+
+    const sticker = fs.readFileSync(completePath)
+
+    this.removeImageFromDisk(completePath)
+
     return sticker
+  }
+
+  private removeImageFromDisk(filePath: string) {
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+    })
   }
 }
 
